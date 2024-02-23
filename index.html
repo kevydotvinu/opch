@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive Form - PatternFly</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/4.0.2/css/patternfly.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/4.0.2/css/patternfly-additions.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>OpenShift Packet Capture Helper</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-container">
+                    <form id="opchForm">
+                        <div class="form-group first-level-fields" id="cniField">
+                            <label for="cni">CNI</label>
+                            <select class="form-control" id="cni">
+                                <option value=""></option>
+                                <option value="ovnk">OVN Kubernetes</option>
+                            </select>
+                        </div>
+                        <div class="form-group second-level-fields" id="sourceField">
+                            <label for="source">Source</label>
+                            <select class="form-control" id="source">
+                                <option value=""></option>
+                                <option value="external">External</option>
+                                <option value="node">Node</option>
+                                <option value="pod">Pod</option>
+                            </select>
+                        </div>
+                        <div class="form-group second-level-fields" id="entryPointField">
+                            <label for="entryPoint">Entry Point</label>
+                            <select class="form-control" id="entryPoint">
+                                <option value=""></option>
+                                <option value="primaryInterface">Primary interface</option>
+                                <option value="secondaryInterface">Secondary interface</option>
+                                <option value="route">Route</option>
+                            </select>
+                        </div>
+                        <div class="form-group second-level-fields" id="objectField1">
+                            <label for="object1">Object</label>
+                            <select class="form-control" id="object1">
+                                <option value=""></option>
+                                <option value="service">Service</option>
+                                <option value="pod">Pod</option>
+                                <option value="egressip">Egress IP</option>
+                            </select>
+                        </div>
+                        <div class="form-group second-level-fields" id="objectField2">
+                            <label for="object2">Object</label>
+                            <select class="form-control" id="object2">
+                                <option value=""></option>
+                                <option value="service">Service</option>
+                                <option value="pod">Pod</option>
+                            </select>
+                        </div>
+                        <div class="form-group second-level-fields" id="exitPointField">
+                            <label for="exitPoint">Exit Point</label>
+                            <select class="form-control" id="exitPoint">
+                                <option value=""></option>
+                                <option value="primaryInterface">Primary interface</option>
+                                <option value="secondaryInterface">Secondary interface</option>
+                            </select>
+                        </div>
+                        <div class="form-group third-level-fields" id="serviceTypeField">
+                            <label for="serviceType">Service Type</label>
+                            <select class="form-control" id="serviceType" placeholder="Enter the Service type">
+                                <option value=""></option>
+                                <option value="nodePort">NodePort</option>
+                                <option value="externalIp">External IP</option>
+                            </select>
+                        </div>
+                        <div class="form-group third-level-fields" id="podField">
+                            <label for="pod">Pod</label>
+                            <select class="form-control" id="pod" placeholder="Enter the Pod">
+                                <option value=""></option>
+                                <option value="podSameNode">Pod on same node</option>
+                                <option value="podDiffNode">Pod on different node</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-button green"></div>
+                        <div class="terminal-button yellow"></div>
+                        <div class="terminal-button red"></div>
+                    </div>
+                    <div class="terminal-body" id="terminalOutput">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="faq-container">
+            <h4>FAQ</h4>
+            <ul>
+                <li>
+                    <strong>Q: How does one execute the <code>tcpdump</code> command on an RHCOS node?</strong>
+                    <p>A: The <code>tcpdump</code> command is available within the <code>toolbox</code> or debug
+                        container image.</p>
+                </li>
+                <li>
+                    <strong>Q: How can multiple packet capture commands be executed simultaneously in
+                        <code>toolbox</code>?</strong>
+                    <p>A: You can utilize the <code>&</code> symbol at the end of each packet capture command. This will
+                        execute each
+                        <code>tcpdump</code> command concurrently in the background. To halt each process, you can bring
+                        it to the
+                        foreground using the <code>fg</code> command and terminate it by pressing <code>Ctrl+c</code>.
+                    <pre><code>$ tcpdump -i br-ex -w br-ex.pcap &
+[1] 207592
+$ tcpdump -i ovn-k8s-mp0 -w ovn-k8s-mp0.pcap &
+[2] 207003
+$ fg 1 <-- Run and press Ctrl+c
+$ fg 2 <-- Run and press Ctrl+c
+</code></pre>
+                    </p>
+                </li>
+                <li>
+                    <strong>Q: Is there an essential article available for convenient packet collection from Pods or
+                        nodes on OpenShift?</strong>
+                    <p>A: Yes, there are must-have articles (<a href="https://access.redhat.com/solutions/4569211"
+                            target="_blank">KCS4569211</a> and <a href="https://access.redhat.com/solutions/5074041"
+                            target="_blank">KCS5074041</a>) that serve as a handy guide for efficiently collecting
+                        packets from both Pods and nodes within an OpenShift environment.
+                    </p>
+                </li>
+                <li>
+                    <strong>Q: What are the additional information required for packet analysis?</strong>
+                    <p>A: When preparing to analyze packets, certain supplementary details are essential. These include:</p>
+                    <ul>
+                    <li>Timestamp in <code>date +%d-%m-%Y-%H-%M-%S-%Z</code> format (applicable for timestamping events): This ensures accurate time representation during analysis.</li>
+                    <li>Source and destination of the connection: Knowing the origin and destination of the connection aids in understanding the network flow.</li>
+                    <li><code>tcpdump</code> command utilized: Providing the specific tcpdump command used for packet capture helps in understanding the different options used.</li>
+                    <li>Location of packet capture (if hostname in the pcap name is ambiguous): Clarifying the location of packet capture is crucial, especially if the hostname in the pcap name lacks clarity.</li>
+                    <li>Network topology of connectivity (if available, utilize asciiflow.com): Sharing the network topology, preferably visualized using tools like asciiflow.com, offers valuable insights into the network's architecture and connectivity patterns.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Q: How can one reduce the size of the pcap file while conducting an <code>iperf</code> test?</strong>
+                    <p>A: To minimize the size of the pcap file generated by the <code>tcpdump</code> command, you can utilize the <code>-s 200</code> option. This option sets the snapshot length to <code>200</code> bytes, meaning tcpdump will only capture the first <code>200</code> bytes of each packet. This reduces the amount of data captured and subsequently the size of the resulting pcap file.
+                    </p>
+                </li>
+                <!-- Add more Q&A items as needed -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

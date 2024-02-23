@@ -1,0 +1,86 @@
+        body {
+            font-family: "Red Hat Text", Arial, sans-serif;
+            margin: 60px;
+        }
+
+        .first-level-fields {
+            display: block;
+        }
+
+        .second-level-fields,
+        .third-level-fields {
+            display: none;
+        }
+
+        .page-header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .terminal-window {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+            width: 100%;
+            max-width: 900px;
+            height: 549px;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            box-shadow: 0 0 3px 0px rgb(40, 42, 54);
+        }
+
+        .terminal-header {
+            background: #e0e8f0;
+            height: 30px;
+            border-radius: 8px 8px 0 0;
+            padding-left: 10px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            margin: 10px 4px 0 0;
+            display: inline-block;
+            border-radius: 50%;
+        }
+
+        .green {
+            background: #3bb662;
+        }
+
+        .yellow {
+            background: #e5c30f;
+        }
+
+        .red {
+            background: #e75448;
+        }
+
+        .terminal-body {
+            font-family: "Red Hat Text", Arial, sans-serif;
+            color: black;
+            background: white;
+            opacity: 0.9;
+            padding: 10px;
+            box-sizing: border-box;
+            position: absolute;
+            width: 100%;
+            top: 30px;
+            bottom: 0;
+            overflow: auto;
+        }
+
+        .faq-container {
+            margin-top: 20px;
+        }
