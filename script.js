@@ -278,7 +278,6 @@ nsenter &lt;netns&gt; -- tcpdump -nn -s 0 -i &lt;interface&gt; -w $&#123FILENAME
                         var objectValue = $('#object2').val().trim();
                         if (objectValue === 'service') {
                             $('#podField').show();
-                            $('#objectField2').show();
                             var podValue = $('#pod').val().trim();
                             if (podValue === 'podSameNode') {
                                 var commands = `<pre><code class="bash">$ cat opch.txt
@@ -308,8 +307,6 @@ nsenter &lt;netns&gt; -- tcpdump -nn -s 0 -i &lt;interface&gt; -w $&#123FILENAME
                             }
                         } else if (objectValue === 'pod') {
                             $('#podField').show();
-                            $('#objectField1').show();
-                            $('#objectField2').hide();
                             var podValue = $('#pod').val().trim();
                             if (podValue === 'podSameNode') {
                                 var commands = `<pre><code class="bash">$ cat opch.txt

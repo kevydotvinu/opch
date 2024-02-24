@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progressive Form - PatternFly</title>
+    <title>OpenShift Packet Capture Helper</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/4.0.2/css/patternfly.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/4.0.2/css/patternfly-additions.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/4.0.2/css/patternfly-additions.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
@@ -78,7 +77,7 @@
                         </div>
                         <div class="form-group third-level-fields" id="serviceTypeField">
                             <label for="serviceType">Service Type</label>
-                            <select class="form-control" id="serviceType" placeholder="Enter the Service type">
+                            <select class="form-control" id="serviceType">
                                 <option value=""></option>
                                 <option value="nodePort">NodePort</option>
                                 <option value="externalIp">External IP</option>
@@ -86,7 +85,7 @@
                         </div>
                         <div class="form-group third-level-fields" id="podField">
                             <label for="pod">Pod</label>
-                            <select class="form-control" id="pod" placeholder="Enter the Pod">
+                            <select class="form-control" id="pod">
                                 <option value=""></option>
                                 <option value="podSameNode">Pod on same node</option>
                                 <option value="podDiffNode">Pod on different node</option>
@@ -144,14 +143,14 @@ $ fg 2 <-- Run and press Ctrl+c
                 </li>
                 <li>
                     <strong>Q: What are the additional information required for packet analysis?</strong>
-                    <p>A: When preparing to analyze packets, certain supplementary details are essential. These include:</p>
+                    <p>A: When preparing to analyze packets, certain supplementary details are essential. These include:
                     <ul>
                     <li>Timestamp in <code>date +%d-%m-%Y-%H-%M-%S-%Z</code> format (applicable for timestamping events): This ensures accurate time representation during analysis.</li>
                     <li>Source and destination of the connection: Knowing the origin and destination of the connection aids in understanding the network flow.</li>
                     <li><code>tcpdump</code> command utilized: Providing the specific tcpdump command used for packet capture helps in understanding the different options used.</li>
                     <li>Location of packet capture (if hostname in the pcap name is ambiguous): Clarifying the location of packet capture is crucial, especially if the hostname in the pcap name lacks clarity.</li>
                     <li>Network topology of connectivity (if available, utilize asciiflow.com): Sharing the network topology, preferably visualized using tools like asciiflow.com, offers valuable insights into the network's architecture and connectivity patterns.</li>
-                    </ul>
+                    </ul></p>
                 </li>
                 <li>
                     <strong>Q: How can one reduce the size of the pcap file while conducting an <code>iperf</code> test?</strong>
