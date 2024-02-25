@@ -13,6 +13,7 @@
                     if (sourceValue === 'external') {
                         $('#entryPointField').show();
                         $('#objectField1').hide();
+                        $('#objectField2').hide();
                         $('#podField').hide();
                         $('#exitPointField').hide();
                         var entryPointValue = $('#entryPoint').val().trim();
