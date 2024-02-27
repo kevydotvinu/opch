@@ -26,6 +26,18 @@ body {
     height: 30px;
     border-radius: 8px 8px 0 0;
     padding-left: 10px;
+    position: relative;
+}
+
+.terminal-header::after {
+    content: "Choose the CNI and network flow to obtain the packet capture points";
+    display: block;
+    font-size: 14px;
+    color: #333;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .terminal-button {
